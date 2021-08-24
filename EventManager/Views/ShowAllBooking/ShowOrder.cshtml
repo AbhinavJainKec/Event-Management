@@ -1,0 +1,177 @@
+﻿@model EventManager.Model.CompleteBookingModel
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Show Order"; }
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header align-self-center">Booking Details</div>
+                <div class="card-body">
+                    <div class="col d-grid mx-auto">
+                        <div class="row">
+                            <div class="col d-grid mx-auto">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="@Model.BillingModel.BookingNo" style="background-color:azure;" type="text" readonly="readonly" class="form-control" placeholder="Booking Number" aria-label="Booking Number" />
+                                    <label asp-for="@Model.BillingModel.BookingNo">Booking Number</label>
+                                </div>
+                            </div>
+                            <div class="col d-grid mx-auto">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="@Model.BillingModel.BookingDate" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Booking Date" aria-label="Booking Date" />
+                                    <label asp-for="@Model.BillingModel.BookingDate">Booking Date</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col d-grid mx-auto">
+                        <div class="form-floating mb-3">
+                            <input asp-for="@Model.BillingModel.TotalAmount" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Total Amount" aria-label="Total Amount" />
+                            <label asp-for="@Model.BillingModel.TotalAmount">Total Amount</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header align-self-center">Venue Details</div>
+                <div class="card-body">
+                    <div class="col d-grid mx-auto">
+                        <div class="form-floating mb-3">
+                            <input asp-for="@Model.BookingVenue.VenueName" style="background-color:azure;" type="text" readonly="readonly" class="form-control" placeholder="Venue Name" aria-label="Venue Name" />
+                            <label asp-for="@Model.BookingVenue.VenueName">Venue Name</label>
+                        </div>
+                    </div>
+                    <div class="col d-grid mx-auto">
+                        <div class="form-floating mb-3">
+                            <input asp-for="@Model.BookingVenue.VenueCost" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Venue Cost" aria-label="Venue Cost" />
+                            <label asp-for="@Model.BookingVenue.VenueCost">Venue Cost</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header align-self-center">Equipment Details</div>
+                <div class="card-body">
+                    @for (int i = 0; i < Model.BookingEquipment.Count(); i++)
+                    {
+                        <div class="col d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input asp-for="@Model.BookingEquipment[i].EquipmentName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Equipment Name" aria-label="Equipment Name" />
+                                <label asp-for="@Model.BookingEquipment[i].EquipmentName">Equipment Name</label>
+                            </div>
+                        </div>
+                        <div class="col d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input asp-for="@Model.BookingEquipment[i].EquipmentCost" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Equipment Cost" aria-label="Equipment Cost" />
+                                <label asp-for="@Model.BookingEquipment[i].EquipmentCost">Equipment Cost</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header align-self-center">Flower Details</div>
+                <div class="card-body">
+                    @for (int i = 0; i < Model.BookingFlower.Count(); i++)
+                    {
+                        <div class="col d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input asp-for="@Model.BookingFlower[i].FlowerName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Flower Name" aria-label="Flower Name" />
+                                <label asp-for="@Model.BookingFlower[i].FlowerName">Flower Name</label>
+                            </div>
+                        </div>
+                        <div class="col d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input asp-for="@Model.BookingFlower[i].FlowerCost" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Flower Cost" aria-label="Flower Cost" />
+                                <label asp-for="@Model.BookingFlower[i].FlowerCost">Flower Cost</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header align-self-center">Lighting Details</div>
+                <div class="card-body">
+                    @for (int i = 0; i < Model.BookingLight.Count(); i++)
+                    {
+                        <div class="col d-grid mx-auto">
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="@Model.BookingLight[i].LightName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Light Name" aria-label="Light Name" />
+                                        <label asp-for="@Model.BookingLight[i].LightName">Light Name</label>
+                                    </div>
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="@Model.BookingLight[i].LightTypeName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Light Type" aria-label="Light Type" />
+                                        <label asp-for="@Model.BookingLight[i].LightTypeName">Light Type</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input asp-for="@Model.BookingLight[i].LightCost" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Light Cost" aria-label="Light Cost" />
+                                <label asp-for="@Model.BookingLight[i].LightCost">Light Cost</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header align-self-center">Food Details</div>
+                <div class="card-body">
+                    @for (int i = 0; i < Model.BookingFood.Count(); i++)
+                    {
+                        <div class="col d-grid mx-auto">
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="@Model.BookingFood[i].FoodName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Food Name" aria-label="Food Name" />
+                                        <label asp-for="@Model.BookingFood[i].FoodName">Food Name</label>
+                                    </div>
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="@Model.BookingFood[i].FoodTypeName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Food Type" aria-label="Food Type" />
+                                        <label asp-for="@Model.BookingFood[i].FoodTypeName">Food Type</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col d-grid mx-auto">
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="@Model.BookingFood[i].MealTypeName" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Meal Type" aria-label="Meal Type" />
+                                        <label asp-for="@Model.BookingFood[i].MealTypeName">Meal Type</label>
+                                    </div>
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="@Model.BookingFood[i].FoodCost" style="background-color:azure;" readonly="readonly" type="text" class="form-control" placeholder="Food Cost" aria-label="Food Cost" />
+                                        <label asp-for="@Model.BookingFood[i].FoodCost">Food Cost</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+﻿@model EventManager.Model.RegistrationViewModel
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "Admin"; }
+
+
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header align-self-center">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="SuperAdmin" asp-action="Dashboard">User Profile</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="Name" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" />
+                        <label asp-for="Name">Full Name</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="Username" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="Username" aria-label="Username" />
+                        <label asp-for="Username">Username</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="Gender" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="Gender" aria-label="Gender" />
+                        <label asp-for="Gender">Gender</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="Birthdate" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="Date Of Birth" aria-label="Date Of Birth" />
+                        <label asp-for="Birthdate">Date Of Birth</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="Mobileno" style="background-color:aliceblue;" readonly="readonly" type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" />
+                        <label asp-for="Mobileno">Phone Number</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="EmailID" style="background-color:aliceblue;" readonly="readonly" type="email" class="form-control" placeholder="Email Address" aria-label="Email Address" />
+                        <label asp-for="EmailID">Email Address</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Address" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="Address" aria-label="Address" />
+                <label asp-for="Address">Permanent Address</label>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="CountryName" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="Country" aria-label="Country" />
+                        <label asp-for="CountryName">Country</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="StateName" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="State" aria-label="State" />
+                        <label asp-for="StateName">State</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input asp-for="CityName" style="background-color:aliceblue;" readonly="readonly" type="text" class="form-control" placeholder="City" aria-label="City" />
+                        <label asp-for="CityName">City</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg d-grid mx-auto mb-3">
+                    <a class="text-danger btn btn-warning" asp-area="" asp-controller="ShowBookingDetails" asp-action="AllBookings">Show All Bookings To Be Approved</a>
+                </div>
+                <div class="col-lg d-grid mx-auto mb-3">
+                    <a class="text-danger btn btn-warning" asp-area="" asp-controller="UsersProfiles" asp-action="Profile">Show All User's Profiles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

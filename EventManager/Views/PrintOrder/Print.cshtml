@@ -1,0 +1,97 @@
+﻿@model EventManager.Model.BillingModel
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Print Order"; }
+
+<div class="container-fluid">
+    <div id="DivIdToPrint">
+        <div style="border-style: dotted;" class="col-xs-offset-0 col-xs-12" print-section>
+            <div class="card">
+                <div class="card-body">
+                    <h3 style="text-align:center"><span class="label label-info">Receipt</span></h3>
+                    <div class="row">
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.BookingNo" readonly="readonly" type="text" class="form-control" placeholder="@Model.BookingNo" aria-label="@Model.BookingNo" />
+                                <label asp-for="@Model.BookingNo">Booking Number</label>
+                            </div>
+                        </div>
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.BookingDate" readonly="readonly" type="text" class="form-control" placeholder="@Model.BookingDate" aria-label="@Model.BookingDate" />
+                                <label asp-for="@Model.BookingDate">Booking Date</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.TotalVenueCost" readonly="readonly" type="text" class="form-control" placeholder="@Model.TotalVenueCost" aria-label="@Model.TotalVenueCost" />
+                                <label asp-for="@Model.TotalVenueCost">Total Venue Cost</label>
+                            </div>
+                        </div>
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.TotalEquipmentCost" readonly="readonly" type="text" class="form-control" placeholder="@Model.TotalEquipmentCost" aria-label="@Model.TotalEquipmentCost" />
+                                <label asp-for="@Model.TotalEquipmentCost">Total Equipment Cost</label>
+                            </div>
+                        </div>
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.TotalFoodCost" readonly="readonly" type="text" class="form-control" placeholder="@Model.TotalFoodCost" aria-label="@Model.TotalFoodCost" />
+                                <label asp-for="@Model.TotalFoodCost">Total Food Cost</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.TotalFlowerCost" readonly="readonly" type="text" class="form-control" placeholder="@Model.TotalFlowerCost" aria-label="@Model.TotalFlowerCost" />
+                                <label asp-for="@Model.TotalFlowerCost">Total Flower Cost</label>
+                            </div>
+                        </div>
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color: aliceblue;" asp-for="@Model.TotalLightCost" readonly="readonly" type="text" class="form-control" placeholder="@Model.TotalLightCost" aria-label="@Model.TotalLightCost" />
+                                <label asp-for="@Model.TotalLightCost">Total Light Cost</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg d-grid mx-auto">
+                            <div class="form-floating mb-3">
+                                <input style="background-color:ivory;" asp-for="@Model.TotalAmount" readonly="readonly" type="text" class="form-control" placeholder="@Model.TotalAmount" aria-label="@Model.TotalAmount" />
+                                <label asp-for="@Model.TotalAmount">Total Amount</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div print-remove class="col d-grid mx-auto mb-3">
+                        <input type='button' id='btn' value='Print' onclick='printDiv();'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function printDiv() {
+
+        var divToPrint = document.getElementById('DivIdToPrint');
+
+        var newWin = window.open('', 'Print-Window');
+
+        newWin.document.open();
+
+        newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+        newWin.document.close();
+
+        setTimeout(function () { newWin.close(); }, 10);
+
+    }
+</script>

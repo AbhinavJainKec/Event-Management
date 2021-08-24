@@ -1,0 +1,81 @@
+﻿@{ ViewData["Title"] = "Edit Flower"; }
+@model EventManager.Model.Flower
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="container-fluid">
+    @if (TempData["FlowerUpdateMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["FlowerUpdateMessage"]</p>
+    }
+
+    <div class="card">
+        <div class="row g-0">
+            @if (!string.IsNullOrEmpty(Model.FlowerFilePath))
+            {
+                <div class="col-md-4 align-self-center">
+                    <div class="">
+                        <img src="/@Model.FlowerFilePath" class="img-fluid img-thumbnail rounded-start" alt="Uploaded Flower" title="Uploaded Flower" />
+                    </div>
+                </div>
+            }
+            <div class="col md-8">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Flower" asp-action="Edit">
+                        <div class="col-xs-offset-0 col-xs-4">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            <h3><span class="label label-info">Edit Flower</span></h3>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="FlowerName" type="text" onblur="CheckFlowerNameExists();" class="form-control" placeholder="Flower Name" aria-label="Flower Name" />
+                                <label class="control-label" asp-for="FlowerName">Flower Name</label>
+                                <span asp-validation-for="FlowerName" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="FlowerCost" type="text" class="form-control" placeholder="Flower Cost" aria-label="Flower Cost" />
+                                <label class="control-label" asp-for="FlowerCost">Flower Cost</label>
+                                <span asp-validation-for="FlowerCost" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 input-group">
+                                <input type="file" id="FlowerFile" title="Please Upload Flower" class="form-control" name="files" multiple placeholder="Flower File" aria-label="Flower File"/>
+                                <label class="input-group-text" style="background-color:lightsalmon;" for="FlowerFile">Upload Flower</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="FlowerID" type="hidden" />
+                            </div>
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <input id="Submit" type="submit" class="btn btn-success" value="Update" />
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <a class="btn btn-info" href="/AllFlower/ViewAllFlowers">Show All Flowers</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function CheckFlowerNameExists()
+        {
+            var url = '@Url.Content("~/")' + "Equipment/CheckFlowerNameExists";
+            var source = "#FlowerName";
+            $.post(url, { FlowerName: $(source).val() },
+            function (data)
+            {
+                if (data)
+                {
+                    $(source).val('');
+                    alert("Flower Name Already Used try unique one!");
+                }
+                else
+                {
+
+                }
+            });
+        }
+    </script>
+</div>

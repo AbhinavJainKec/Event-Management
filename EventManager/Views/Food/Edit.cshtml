@@ -1,0 +1,140 @@
+﻿@{ ViewData["Title"] = "Edit Food"; }
+@model EventManager.Model.Food
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="container-fluid">
+    @if (TempData["FoodUpdateMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["FoodUpdateMessage"]</p>
+    }
+
+    <div class="card">
+        <div class="row g-0">
+            @if (!string.IsNullOrEmpty(Model.FoodFilePath))
+            {
+                <div class="col-md-4 align-self-center">
+                    <div class="">
+                        <img src="/@Model.FoodFilePath" class="img-fluid img-thumbnail rounded-start" alt="Uploaded Food" title="Uploaded Food" />
+                    </div>
+                </div>            
+            }
+            <div class="col md-8">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Food" asp-action="Edit">
+                        @Html.ValidationSummary()
+                        @Html.AntiForgeryToken()
+                        <div class="col-xs-offset-0 col-xs-4">
+                            <h3><span class="label label-info">Edit Food</span></h3>
+
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" style="background-color:lightcyan;" asp-for="FoodType">Food Type</label>
+                                <div class="input-group-text">
+                                    <input asp-for="FoodType"id="FoodType1" value="1" type="radio" placeholder="Veg" aria-label="Veg" />
+                                    <label for="FoodType1" style="padding-left:5px;">Veg</label>
+                                </div>
+                                <div class="input-group-text">
+                                    <input asp-for="FoodType" id="FoodType2" value="2" type="radio" placeholder="Non-Veg" aria-label="Non-Veg" />
+                                    <label for="FoodType2" style="padding-left:5px;">Non-Veg</label>
+                                </div>
+                                <span asp-validation-for="FoodType" class="text-danger"></span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" style="background-color:lightcyan;" asp-for="MealType">Meal Type</label>
+                                <div class="input-group-text">
+                                    <input asp-for="MealType" id="Radio1" value="1" type="radio" placeholder="Lunch" aria-label="Lunch" />
+                                    <label for="Radio1" style="padding-left:5px;">Lunch</label>
+                                </div>
+                                <div class="input-group-text">
+                                    <input asp-for="MealType" id="Radio2" value="2" type="radio" placeholder="Dinner" aria-label="Dinner" />
+                                    <label for="Radio2" style="padding-left:5px;">Dinner</label>
+                                </div>
+                                <span asp-validation-for="MealType" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="DishType" class="form-control" asp-items="@(new SelectList(string.Empty,"ID", "Dishtype"))" placeholder="Dish Type" aria-label="Dish Type"></select>
+                                <label class="control-label" asp-for="DishType">Dish Type</label>
+                                <span asp-validation-for="DishType" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="FoodName" onblur="CheckDishNameExists();" type="text" class="form-control" placeholder="Food Name" aria-label="Food Name" />
+                                <label class="control-label" asp-for="FoodName">Dish Name</label>
+                                <span asp-validation-for="FoodName" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="FoodCost" type="text" class="form-control" placeholder="Food Cost" aria-label="Food Cost" />
+                                <label class="control-label" asp-for="FoodCost">Dish Cost</label>
+                                <span asp-validation-for="FoodCost" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 input-group">
+                                <input required type="file" id="FoodFile" title="Please Upload Dish" class="form-control" name="files" multiple placeholder="Food File" aria-label="Food File" />
+                                <label class="input-group-text" style="background-color:lightsalmon;" for="FoodFile">Upload Dish</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="FoodID" type="hidden" />
+                            </div>
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <input type="submit" class="btn btn-success" value="Update Food" />
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <a class="btn btn-info" href="/AllFood/ViewAllFoods">Show All Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $.getJSON('@Url.Content("~/")' + "Food/BindDishtype", function (data)
+            {
+                var items = '';
+                items += "<option value='" + "" + "'>" + "----Select----" + "</option>";
+                $("#DishType").empty();
+                $.each(data, function (i, subcategory)
+                {
+                    items += "<option value='" + subcategory.ID + "'>" + subcategory.Dishtype + "</option>";
+                });
+                $('#DishType').html(items);
+                if ('@Model.DishType' !='')
+                {
+                    $('#DishType').val('@Model.DishType');
+                }
+            });
+        });
+
+        function CheckDishNameExists()
+        {
+
+            var url = '@Url.Content("~/")' + "Food/CheckDishNameExists";
+            var source = "#FoodName";
+            var Value = "";
+            if (FoodType1 != null)
+            {
+                Value = $("#FoodType1").val();
+            }
+            else
+            {
+                Value = $("#FoodType2").val();
+            }
+
+            $.post(url, { DishName: $(source).val(), FoodType: Value  },
+            function (data)
+            {
+                if (data)
+                {
+                    $(source).val('');
+                    alert("Dish Name Already Used try unique one!");
+                }
+                else
+                {
+
+                }
+            });
+        }
+    </script>
+</div>

@@ -1,0 +1,12 @@
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\bin\Debug\netcoreapp3.1\EventManager.Interface.deps.json
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\bin\Debug\netcoreapp3.1\EventManager.Interface.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\bin\Debug\netcoreapp3.1\EventManager.Interface.pdb
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\bin\Debug\netcoreapp3.1\EventManager.Model.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\bin\Debug\netcoreapp3.1\EventManager.Model.pdb
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.csproj.AssemblyReference.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.AssemblyInfoInputs.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.AssemblyInfo.cs
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.csproj.CoreCompileInputs.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.csproj.CopyComplete
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Interface\obj\Debug\netcoreapp3.1\EventManager.Interface.pdb

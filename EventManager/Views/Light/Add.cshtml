@@ -1,0 +1,78 @@
+﻿@model EventManager.Model.Light
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "Add Light"; }
+
+<div class="container-fluid">
+    @if (TempData["LightMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["LightMessage"]</p>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" asp-controller="Light" asp-action="Add">
+                <div class="col-xs-offset-0 col-xs-4">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <h3><span class="label label-info">Add Light</span></h3>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" style="background-color:lightcyan;" asp-for="LightType">Light Type</label>
+                        <div class="input-group-text">
+                            <input asp-for="LightType" id="LightType1" value="1" type="radio" placeholder="In-Door" aria-label="In-Door" />
+                            <label for="LightType1" style="padding-left:5px;">In-Door</label>
+                        </div>
+                        <div class="input-group-text">
+                            <input asp-for="LightType" id="LightType2" value="2" type="radio" placeholder="Out-Door" aria-label="Out-Door" />
+                            <label for="LightType2" style="padding-left:5px;">Out-Door</label>
+                        </div>
+                        <span asp-validation-for="LightType" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="LightName" type="text" onblur="CheckLightNameExists();" class="form-control" placeholder="Light Name" aria-label="Light Name" />
+                        <label class="control-label" asp-for="LightName">Light Name</label>
+                        <span asp-validation-for="LightName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="LightCost" type="text" class="form-control" placeholder="Light Cost" aria-label="Light Cost" />
+                        <label class="control-label" asp-for="LightCost">Light Cost</label>
+                        <span asp-validation-for="LightCost" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <input type="file" id="LightFile" title="Please Upload Light" class="form-control" name="files" multiple placeholder="Light File" aria-label="Light File" />
+                        <label class="input-group-text" style="background-color:lightsalmon;" for="LightFile">Upload Light</label>
+                    </div>
+                    <div class="row">
+                        <div class="col d-grid mx-auto">
+                            <input id="Submit" type="submit" class="btn btn-success" value="Add New Lights" />
+                        </div>
+                        <div class="col d-grid mx-auto">
+                            <a class="btn btn-info" href="/AllLight/ViewAllLights">Show All Lightings</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function CheckLightNameExists()
+        {
+            var url = '@Url.Content("~/")' + "Light/CheckLightNameAlready";
+            var source = "#LightName";
+            $.post(url, { LightName: $(source).val() },
+            function (data)
+            {
+                if (data)
+                {
+                    $(source).val('');
+                    alert("Light Name Already Used try unique one!");
+                }
+                else
+                {
+
+                }
+            });
+        }
+    </script>
+</div>

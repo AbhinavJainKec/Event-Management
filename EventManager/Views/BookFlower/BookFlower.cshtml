@@ -1,0 +1,78 @@
+﻿@model EventManager.Model.BookingFlower
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Book Flower"; }
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-md-4 align-self-center">
+                <div id="navigate" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                    </div>
+                    <div class="carousel-inner">
+                    </div>
+                    <button class="carousel-control-prev" data-bs-target="#navigate" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" data-bs-target="#navigate" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col col-md-8">
+                <div class="card-body">
+                    <div class="col-xs-offset-0 col-xs-4">
+                        <form id="Booked" asp-controller="BookFlower" asp-action="BookFlower" method="post">
+                            <h3><span class="label label-info">Book Flowers</span></h3>
+                            <div class="input mb-3">
+                                @Html.ValidationSummary(true)
+                                @Html.AntiForgeryToken()
+                                @for (int i = 0; i < Model.FlowerList.Count(); i++)
+                                {
+                                    <div class="input-group-text mb-3">
+                                        <input asp-for="@Model.FlowerList[i].FlowerChecked" type="checkbox" placeholder="@Model.FlowerList[i].FlowerName" aria-label="@Model.FlowerList[i].FlowerName" />
+                                        <label asp-for="@Model.FlowerList[i].FlowerID" style="padding-left:5px;">@Model.FlowerList[i].FlowerName</label>
+                                    </div>
+                                    <input type="hidden" asp-for="@Model.FlowerList[i].FlowerID" />
+                                    <input type="hidden" asp-for="@Model.FlowerList[i].FlowerName" />
+                                }
+                            </div>
+                        </form>
+                        <form id="Cancelled" asp-controller="BookFlower" asp-action="BookFlowerCancel" method="post"></form>
+                        <div class="row">
+                            <div class="col-6 d-grid mx-auto">
+                                <input id="Submit" type="submit" class="btn btn-success" value="Book Flowers" form="Booked" />
+                            </div>
+                            <div class="col-6 d-grid mx-auto">
+                                <input id="Submit" type="submit" class="btn btn-danger" value="Cancel" form="Cancelled"/>
+                                <!--<a class="btn btn-danger" asp-area="" asp-controller="BookFlower" asp-action="BookFlowerCancel" method="post">Cancel</a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        @{var data = (List<EventManager.Model.Flower>)ViewBag.SliderFlowerImages;
+            for (int i = 0; i < (@data.Count()); i++)
+            {
+                <text>
+                $('<div class="carousel-item"  data-bs-interval="5000"><img src = "/@data[i].FlowerFilePath" class="img-fluid img-thumbnail rounded-start" alt="@data[i].FlowerName"><div class="carousel-caption d-none d-md-block">@data[i].FlowerName</div></div>').appendTo('.carousel-inner');
+                $('<button type="button" data-bs-target="#navigate" id="carousel-indicator" class="" data-bs-slide-to="@i"></button>').appendTo('.carousel-indicators');
+                </text>
+                <text>
+                $('.carousel-item').first().addClass('active');
+                $('#carousel-indicator').first().addClass('active');
+                $('#navigate').carousel();
+                </text>
+            }
+        }
+    });
+</script>

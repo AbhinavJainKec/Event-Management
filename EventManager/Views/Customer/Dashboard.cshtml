@@ -1,0 +1,77 @@
+﻿@model EventManager.Model.BookingVenue
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Customer"; }
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col mb-3 d-grid mx-auto align-self-center">
+            <div class="card mb-3">
+                <div class="card-body text-center text-white">
+                    <h1>EVENTS WE ORGANIZE !!!</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 d-grid mx-auto align-self-center">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h4>Birthday Party</h4>
+                </div>
+                <div class="card-body">
+                    <a asp-area="" asp-controller="BookVenue" asp-action="BookVenue"><img src="~/EventImages/Birthday.jpg" class="d-block img-fluid img-thumbnail rounded-start" alt="Birthday Party" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h4>Wedding Party</h4>
+                </div>
+                <div class="card-body">
+                    <a asp-area="" asp-controller="BookVenue" asp-action="BookVenue"><img src="~/EventImages/Wedding.jpg" class="d-block img-fluid img-thumbnail rounded-start" alt="Wedding Party" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h4>Farewell Party</h4>
+                </div>
+                <div class="card-body">
+                    <a asp-area="" asp-controller="BookVenue" asp-action="BookVenue"><img src="~/EventImages/Farewell.jpg" class="d-block img-fluid img-thumbnail rounded-start" alt="Farewell Party" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h4>Family Function</h4>
+                </div>
+                <div class="card-body">
+                    <a asp-area="" asp-controller="BookVenue" asp-action="BookVenue"><img src="~/EventImages/Family.jpg" class="d-block img-fluid img-thumbnail rounded-start" alt="Family Function" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h4>College Event</h4>
+                </div>
+                <div class="card-body">
+                    <a asp-area="" asp-controller="BookVenue" asp-action="BookVenue"><img src="~/EventImages/College.jpg" class="d-block img-fluid img-thumbnail rounded-start" alt="College Event" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-3 d-grid mx-auto">
+            <div class="card mb-3">
+                <div class="card-header text-center">
+                    <h4>Marriage Anniversary</h4>
+                </div>
+                <div class="card-body">
+                    <a asp-area="" asp-controller="BookVenue" asp-action="BookVenue"><img src="~/EventImages/Marriage.jpg" class="d-block img-fluid img-thumbnail rounded-start" alt="Marriage Anniversary" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

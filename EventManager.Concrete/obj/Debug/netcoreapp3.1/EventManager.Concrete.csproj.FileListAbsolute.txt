@@ -1,0 +1,14 @@
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Concrete.deps.json
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Concrete.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Concrete.pdb
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Interface.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Model.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Interface.pdb
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\bin\Debug\netcoreapp3.1\EventManager.Model.pdb
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.csproj.AssemblyReference.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.AssemblyInfoInputs.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.AssemblyInfo.cs
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.csproj.CoreCompileInputs.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.csproj.CopyComplete
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Concrete\obj\Debug\netcoreapp3.1\EventManager.Concrete.pdb

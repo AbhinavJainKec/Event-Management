@@ -1,0 +1,77 @@
+﻿@{ ViewData["Title"] = "Edit Equipment"; }
+@model EventManager.Model.Equipment
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<div class="container-fluid">
+    @if (TempData["EquipmentMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["EquipmentMessage"]</p>
+    }
+
+    <div class="card">
+        <div class="row g-0">
+            @if (!string.IsNullOrEmpty(Model.EquipmentFilePath))
+            {
+                <div class="col-md-4 align-self-center">
+                    <div class="">
+                        <img src="/@Model.EquipmentFilePath" class="img-fluid img-thumbnail rounded-start" alt="Uploaded Equipment" title="Uploaded Equipment" />
+                    </div>
+                </div>            
+            }
+            <div class="col md-8">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Equipment" asp-action="Edit">
+                        <div class="col-xs-offset-0 col-xs-4">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            <h3><span class="label label-info">Edit Equipment</span></h3>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="EquipmentName" type="text" onblur="CheckEquipmentNameExists();" class="form-control" placeholder="Equipment Name" aria-label="Equipment Name" />
+                                <label class="control-label" asp-for="EquipmentName">Equipment Name</label>
+                                <span asp-validation-for="EquipmentName" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="EquipmentCost" type="text" class="form-control" placeholder="Equipment Cost" aria-label="Equipment Cost" />
+                                <label class="control-label" asp-for="EquipmentCost">Equipment Cost</label>
+                                <span asp-validation-for="EquipmentCost" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 input-group">
+                                <input required type="file" id="EquipmentFile" title="Please Upload Equipment" class="form-control" name="files" multiple placeholder="Equipment File" aria-label="Equipment File" />
+                                <label class="input-group-text" style="background-color:lightsalmon;" for="EquipmentFile">Upload Equipment</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="EquipmentID" type="hidden" />
+                            </div>
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <input id="Submit1" type="submit" class="btn btn-success" value="Update Equipment" />
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <a class="btn btn-info" href="/AllEquipment/ViewAllEquipments">Show All Equipment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function CheckEquipmentNameExists()
+        {
+            var url = '@Url.Content("~/")' + "Equipment/CheckEquipmentNameExists";
+            var source = "#EquipmentName";
+            $.post(url, { EquipmentName: $(source).val() },
+            function (data)
+            {
+                if (data)
+                {
+                    $(source).val('');
+                    alert("Equipment Name Already Used try unique one!");
+                }
+            });
+        }
+    </script>
+</div>

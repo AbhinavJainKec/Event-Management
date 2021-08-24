@@ -1,0 +1,19 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Book Equipment Success"; }
+
+@if (ViewData["BookingEquipmentMessage"] != null)
+{
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <div class="card-header">
+                <p class="alert alert-success" style="text-align:center;" id="successMessage">@ViewData["BookingEquipmentMessage"]</p>
+                <h3 style="text-align:center;">Next Process Book Food</h3>
+            </div>
+            <div class="card-body">
+                <div class="col d-grid mx-auto">
+                    <a class="btn btn-outline-info" asp-area="" asp-controller="BookFood" asp-action="BookFood">Click Here to Book Food</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    }

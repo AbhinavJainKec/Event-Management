@@ -1,0 +1,89 @@
+﻿@model EventManager.Model.BookingLight
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Book Light"; }
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="row g-0">
+            <div class="col-md-4 align-self-center">
+                <div id="navigate" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                    </div>
+                    <div class="carousel-inner">
+                    </div>
+                    <button class="carousel-control-prev" data-bs-target="#navigate" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" data-bs-target="#navigate" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col col-md-8">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-controller="BookLight" asp-action="BookLight">
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+                        <div class="col-xs-offset-0 col-xs-4">
+                            <h3><span class="label label-info">Book Lights</span></h3>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" style="background-color:lightcyan;" asp-for="LightType">Light Type</label>
+                                <div class="input-group-text">
+                                    <input asp-for="LightType" id="LightType1" value="1" type="radio" placeholder="In-Door" aria-label="In-Door" />
+                                    <label for="LightType1" style="padding-left:5px;">In-Door</label>
+                                </div>
+                                <div class="input-group-text">
+                                    <input asp-for="LightType" id="LightType2" value="2" type="radio" placeholder="Out-Door" aria-label="Out-Door" />
+                                    <label for="LightType2" style="padding-left:5px;">Out-Door</label>
+                                </div>
+                                <span asp-validation-for="LightType" class="text-danger"></span>
+                            </div>
+                            <div class="input mb-3">
+                                @for (int i = 0; i < Model.LightList.Count(); i++)
+                                {
+                                    <div class="input-group-text mb-3">
+                                        <input asp-for="@Model.LightList[i].LightChecked" type="checkbox" placeholder="@Model.LightList[i].LightName" aria-label="@Model.LightList[i].LightName" />
+                                        <label asp-for="@Model.LightList[i].LightID" style="padding-left:5px;">@Model.LightList[i].LightName</label>
+                                    </div>
+                                    <input type="hidden" asp-for="@Model.LightList[i].LightID" />
+                                    <input type="hidden" asp-for="@Model.LightList[i].LightName" />
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <input id="Submit" type="submit" class="btn btn-success" value="Book Lights" />
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <a class="btn btn-danger" asp-area="" asp-controller="BookFlower" asp-action="BookFlower">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        @{var data = (List<EventManager.Model.Light>)ViewBag.SliderLightImages;
+            for (int i = 0; i < (@data.Count()); i++)
+            {
+                <text>
+                $('<div class="carousel-item"  data-bs-interval="5000"><img src = "/@data[i].LightFilePath" class="img-fluid img-thumbnail rounded-start" alt="@Model.LightList[i].LightName"><div class="carousel-caption d-none d-md-block">@Model.LightList[i].LightName</div></div>').appendTo('.carousel-inner');
+                $('<button type="button" data-bs-target="#navigate" id="carousel-indicator" class="" data-bs-slide-to="@i"></button>').appendTo('.carousel-indicators');
+                </text>
+                <text>
+                $('.carousel-item').first().addClass('active');
+                $('#carousel-indicator').first().addClass('active');
+                $('#navigate').carousel();
+                </text>
+            }
+
+        }
+        });
+</script>

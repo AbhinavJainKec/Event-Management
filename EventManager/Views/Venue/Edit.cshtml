@@ -1,0 +1,81 @@
+﻿@model EventManager.Model.Venue
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+@{ ViewData["Title"] = "Edit Venue"; }
+
+<div class="container-fluid">
+    @if (TempData["VenueUpdateMessage"] != null)
+    {
+        <p class="alert alert-success" id="successMessage">@TempData["VenueUpdateMessage"]</p>
+    }
+
+    <div class="card">
+        <div class="row g-0">
+            @if (!string.IsNullOrEmpty(Model.VenueFilePath))
+            {
+                <div class="col-md-4 align-self-center">
+                    <div class="">
+                        <img src="/@Model.VenueFilePath" class="img-fluid img-thumbnail rounded-start" alt="Uploaded Venue" title="Uploaded Venue" />
+                    </div>
+                </div>
+            }
+            <div class="col md-8">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Venue" asp-action="Edit">
+                        <div class="col-xs-offset-0 col-xs-4">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            <h3><span class="label label-info">Edit Venue</span></h3>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="VenueName" type="text" onblur="CheckVenueNameExists();" class="form-control" placeholder="Venue Name" aria-label="Venue Name" />
+                                <label class="control-label" asp-for="VenueName">Venue Name</label>
+                                <span asp-validation-for="VenueName" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="VenueCost" type="text" class="form-control" placeholder="Venue Cost" aria-label="Venue Cost" />
+                                <label class="control-label" asp-for="VenueCost">Venue Cost</label>
+                                <span asp-validation-for="VenueCost" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 input-group">
+                                <input required type="file" id="VenueFile" title="Please Upload Venue" class="form-control" name="files" multiple placeholder="Venue File" aria-label="Venue File"/>
+                                <label class="input-group-text" style="background-color:lightsalmon;"  for="VenueFile">Upload Venue</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="VenueID" type="hidden" />
+                            </div>
+                            <div class="row">
+                                <div class="col d-grid mx-auto">
+                                    <input id="Submit1" type="submit" class="btn btn-success" value="Update Venue" />
+                                </div>
+                                <div class="col d-grid mx-auto">
+                                    <a class="btn btn-info" href="/AllVenue/ViewAllVenues">Show All Venue</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function CheckVenueNameExists()
+        {
+            var url = '@Url.Content("~/")' + "Venue/CheckVenueNameExists";
+            var source = "#VenueName";
+            $.post(url, { venueName: $(source).val() },
+            function (data)
+            {
+                if (data)
+                {
+                    $(source).val('');
+                    alert("VenueName Already Used try unique one!");
+                }
+                else
+                {
+
+                }
+            });
+        }
+    </script>
+</div>

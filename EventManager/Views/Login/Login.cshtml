@@ -1,0 +1,104 @@
+﻿@model EventManager.Model.LoginViewModel
+@{ ViewData["Title"] = "Login"; }
+
+<div class="container-fluid">
+    <div class="card mb-3">
+        @if (ViewBag.errormessage != null)
+        {
+            <p class="alert alert-danger" id="successMessage">@ViewBag.errormessage</p>
+        }
+        <div class="row g-0">
+            <div class="col-md-3 align-self-center">
+                <div id="image" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/RegisterImages/1.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Beach Party" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/RegisterImages/2.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Farewell Party" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/RegisterImages/3.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Anniversary" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/RegisterImages/4.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Wedding" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark active" asp-area="" asp-controller="Login" asp-action="Login">LogIn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">SignUp</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Login" asp-action="Login" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-floating mb-3">
+                            <input asp-for="Username" onblur="CheckUsernameExists();" type="text" class="form-control" placeholder="Username" aria-label="Username" />
+                            <label class="control-label" asp-for="Username">Username</label>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Password" aria-label="Password" />
+                            <label class="control-label" asp-for="Password">Password</label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col mb-3 d-grid mx-auto">
+                                <input id="Submit1" type="submit" class="btn btn-info" value="Log In" />
+                            </div>
+                            <div class="col mb-3 d-grid mx-auto">
+                                <a class="btn btn-success" href="/Registration/Registration">Register</a>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            Don't have an account ?  @Html.ActionLink("Create one !", "Registration", "Registration")
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <p class="nav-link text-dark active">Instructions</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body" style="max-height: 450px; overflow-y: auto">
+                    <h6 class="card-title">
+                        Username
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It should start with alphabetical letters only.</li>
+                            <li>It's length should be 6 to 32 characters.</li>
+                            <li>It can contain alphabets, numbers, special characters [. - _].</li>
+                            <li>Each special character should be followed by an Alpha-numeric.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Password
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It should contain at least 8 characters.</li>
+                            <li>It must contain one digit [0-9].</li>
+                            <li>It must contain one upper case alphabet [A-Z].</li>
+                            <li>It must contain one lower case alphabet [a-z].</li>
+                            <li>It must contain one special character which includes [# $ ^ + = ! * ( ) @@ % &].</li>
+                            <li>Their should be no white spaces.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

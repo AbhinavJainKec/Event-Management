@@ -1,0 +1,413 @@
+﻿@model EventManager.Model.Registration
+@{ Layout = "~/Views/Shared/_SuperAdminLayout.cshtml"; }
+@{ ViewData["Title"] = "Create Admin User"; }
+
+<div class="container-fluid">
+    <div class="card mb-3">
+        @if (TempData["MessageRegistration"] != null)
+        {
+            <p class="alert alert-success" id="successMessage">@TempData["MessageRegistration"]</p>
+        }
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="row g-0">
+            <div class="col-md-3 align-self-center">
+                <div id="image" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/RegisterImages/1.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Beach Party" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/RegisterImages/2.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Farewell Party" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/RegisterImages/3.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Anniversary" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/RegisterImages/4.jpg" class="d-block img-fluid img-thumbnail rounded-start w-100" alt="Wedding" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark active" asp-area="" asp-controller="Registration" asp-action="Registration">Create Admin User</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="CreateAdminUser" asp-action="Create">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="Name" type="text" class="form-control" placeholder="Full Name" aria-label="Full Name" />
+                                    <label class="control-label" asp-for="Name">Full Name</label>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="Username" onblur="CheckUsernameExists();" type="text" class="form-control" placeholder="Username" aria-label="Username" />
+                                    <label class="control-label" asp-for="Username">Username</label>
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select asp-for="Gender" class="form-control" placeholder="Gender" aria-label="Gender">
+                                        <option disabled selected>---Select---</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                        <option value="T">Trans</option>
+                                    </select>
+                                    <label class="control-label" asp-for="Gender">Gender</label>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="Birthdate" id="Birthdate" type="date" class="form-control" placeholder="Date Of Birth" aria-label="Date Of Birth" />
+                                    <label class="control-label" asp-for="Birthdate">Date Of Birth</label>
+                                    <span asp-validation-for="Birthdate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="Mobileno" maxlength="10" name="Mobileno" onkeydown="return OnlyNumeric(this);" type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" />
+                                    <label class="control-label" asp-for="Mobileno">Phone Number</label>
+                                    <span asp-validation-for="Mobileno" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="EmailID" type="email" class="form-control" placeholder="Email Address" aria-label="Email Address" />
+                                    <label class="control-label" asp-for="EmailID">Email Address</label>
+                                    <span asp-validation-for="EmailID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Address" type="text" class="form-control" placeholder="Address" aria-label="Address" />
+                            <label class="control-label" asp-for="Address">Permanent Address</label>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select asp-for="Country" class="form-control" asp-items="@(new SelectList(string.Empty,"CountryID", "Name"))" placeholder="Country" aria-label="Country"></select>
+                                    <label class="control-label" asp-for="Country">Country</label>
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select asp-for="State" class="form-control" asp-items="@(new SelectList(string.Empty,"StateID", "StateName"))" placeholder="State" aria-label="State"></select>
+                                    <label class="control-label" asp-for="State">State</label>
+                                    <span asp-validation-for="State" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select asp-for="City" class="form-control" asp-items="@(new SelectList(string.Empty,"CityID", "CityName"))" placeholder="City" aria-label="City"></select>
+                                    <label class="control-label" asp-for="City">City</label>
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" aria-label="Password" />
+                                    <label class="control-label" asp-for="Password">Password</label>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" />
+                                    <label class="control-label" asp-for="ConfirmPassword">Confirm Password</label>
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col mb-3 d-grid mx-auto">
+                                <input id="Submit1" type="submit" class="btn btn-success" value="Register" />
+                            </div>
+                            <div class="col mb-3 d-grid mx-auto">
+                                <a class="btn btn-danger" href="/CreateAdminUser/Create">Clear</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <p class="nav-link text-dark active">Instructions</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body" style="max-height: 655px; overflow-y: auto">
+                    <h6 class="card-title">
+                        Username
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It should start with alphabetical letters only.</li>
+                            <li>It's length should be 6 to 32 characters.</li>
+                            <li>It can contain alphabets, numbers, special characters [. - _].</li>
+                            <li>Each special character should be followed by an Alpha-numeric.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Full Name
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It's length should be 1 to 20 characters.</li>
+                            <li>It should contain only alphabetical letters.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Gender
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It can be either Male, Female or Trans Gender.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Email Address
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It must contain name, domain, symbols [. @@].</li>
+                            <li>It should be like name@domain.com, etc</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Phone Number
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It must be a 10-Digit Phone Number exluding country code.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Date Of Birth
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It must be in DD/MM/YYYY format only.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Permanent Address, Country, State & City
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It must be properly written.</li>
+                        </ul>
+                    </p>
+                    <h6 class="card-title">
+                        Password & Confirm Password
+                    </h6>
+                    <p class="card-text">
+                        <ul>
+                            <li>It should contain at least 8 characters.</li>
+                            <li>It must contain one digit [0-9].</li>
+                            <li>It must contain one upper case alphabet [A-Z].</li>
+                            <li>It must contain one lower case alphabet [a-z].</li>
+                            <li>It must contain one special character which includes [# $ ^ + = ! * ( ) @@ % &].</li>
+                            <li>Their should be no white spaces.</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $.getJSON( '@Url.Content("~/")' + "api/CountryAPI", function (data)
+        {
+            var items = '';
+            $("#Country").empty();
+            $.each(data, function (i, subcategory)
+            {
+                if (i == 0)
+                {
+                    items += "<option value='" + "" + "'>" + "----Select----" + "</option>";
+                }
+                else
+                {
+                    items += "<option value='" + subcategory.CountryID + "'>" + subcategory.Name + "</option>";
+                }
+            });
+            $('#Country').html(items);
+
+               if ('@Model.Country' !='')
+               {
+                   $('#Country').val('@Model.Country');
+               }
+        });
+
+        $('#Country').change(function ()
+        {
+            var url = '@Url.Content("~/")' + "api/StateAPI";
+                var ddlsource = "#Country";
+                $.post(url, { id: $(ddlsource).val() }, function (data)
+                {
+                    var items = '';
+                    $("#State").empty();
+                    $.each(data, function (i, subcategory)
+                    {
+                        items += "<option value='" + subcategory.StateID + "'>" + subcategory.StateName + "</option>";
+                    });
+                    $('#State').html(items);
+
+                });
+          });
+
+        $('#State').change(function ()
+            {
+             var url = '@Url.Content("~/")' + "api/CityAPI";
+             var ddlsource = "#State";
+                $.post(url, { id: $(ddlsource).val() }, function (data)
+                {
+                    var items = '';
+                    $("#City").empty();
+                    $.each(data, function (i, subcategory) {
+                        items += "<option value='" + subcategory.CityID + "'>" + subcategory.CityName + "</option>";
+                    });
+                    $('#City').html(items);
+                });
+        });
+
+        RebindState();
+    });
+
+
+    function RebindState()
+    {
+        if ('@Model.Country' != '')
+        {
+                var url = '@Url.Content("~/")' + "api/StateAPI";
+                var ddlsource = "#Country";
+                $.post(url, { id: '@Model.Country' }, function (data)
+                {
+                    var items = '';
+                    $("#State").empty();
+                    $.each(data, function (i, subcategory)
+                    {
+                        items += "<option value='" + subcategory.StateID + "'>" + subcategory.StateName + "</option>";
+                    });
+                    $('#State').html(items);
+
+                    if ('@Model.State' !='')
+                     {
+                        $('#State').val('@Model.State');
+                        RebindCities();
+                     }
+                });
+
+        }
+    }
+
+    function RebindCities()
+    {
+        if ('@Model.State' != '')
+        {
+             var url = '@Url.Content("~/")' + "api/CityAPI";
+             var ddlsource = "#State";
+                $.post(url, { id: '@Model.State' }, function (data)
+                {
+                    var items = '';
+                    $("#City").empty();
+                    $.each(data, function (i, subcategory) {
+                        items += "<option value='" + subcategory.CityID + "'>" + subcategory.CityName + "</option>";
+                    });
+                    $('#City').html(items);
+
+                     if ('@Model.City' !='')
+                     {
+                         $('#City').val('@Model.City');
+                     }
+                });
+        }
+    }
+
+
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        $("#Birthdate").datepicker
+            ({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+100",
+            onSelect: function (date)
+            {
+                var dob = new Date(date);
+                var today = new Date();
+
+                if (dob.getFullYear() + 18 < today.getFullYear())
+                {
+
+                }
+                else
+                {
+                    $("#Birthdate").val('');
+                    alert("User are not eligible for CreateAdminUser");
+                }
+            }
+        });
+    });
+
+    function OnlyNumeric(evt)
+    {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if ((charCode < 48 || charCode > 57))
+        {
+            if (charCode == 8 || charCode == 46 || charCode == 0)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    function CheckUsernameExists()
+    {
+        var url = '@Url.Content("~/")' + "CreateAdminUser/CheckUserNameExists";
+        var source = "#Username";
+        $.post(url, { Username: $(source).val() }, function (data)
+                {
+                    if (data)
+                    {
+                        $(source).val('');
+                        alert("Username Already Used try unique one!");
+                    }
+                    else
+                    {
+
+                    }
+                });
+    }
+</script>

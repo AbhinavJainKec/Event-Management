@@ -1,0 +1,9 @@
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\bin\Debug\netcoreapp3.1\EventManager.Model.deps.json
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\bin\Debug\netcoreapp3.1\EventManager.Model.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\bin\Debug\netcoreapp3.1\EventManager.Model.pdb
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\obj\Debug\netcoreapp3.1\EventManager.Model.csproj.AssemblyReference.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\obj\Debug\netcoreapp3.1\EventManager.Model.AssemblyInfoInputs.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\obj\Debug\netcoreapp3.1\EventManager.Model.AssemblyInfo.cs
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\obj\Debug\netcoreapp3.1\EventManager.Model.csproj.CoreCompileInputs.cache
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\obj\Debug\netcoreapp3.1\EventManager.Model.dll
+C:\Users\Abhin\Desktop\College Material\Projects\EventManager\EventManager.Model\obj\Debug\netcoreapp3.1\EventManager.Model.pdb
